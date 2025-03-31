@@ -3,33 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera</title>
+    <title>Videos</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="app-page">
         <div class="app-header">
             <a href="index.html" class="back-button">BACK</a>
-            <h1 style="margin-left: 20px;">Camera</h1>
+            <h1 style="margin-left: 20px;">Videos</h1>
         </div>
         <div class="app-content">
             <div class="camera-preview">
-                <video id="camera-feed" autoplay playsinline></video>
-                <img id="captured-image" style="display: none;">
+                <video id="video-feed" autoplay playsinline></video>
+                <video id="recorded-video" controls style="display: none;"></video>
             </div>
+            <div id="timer-display" class="timer-display">00:00</div>
         </div>
         <div class="app-footer">
-            <div id="camera-controls">
+            <div id="video-controls">
                 <button id="flip-camera-btn">Flip Camera</button>
-                <button id="capture-btn">Take Photo</button>
+                <button id="record-btn" class="record-btn">Start Recording</button>
+                <button id="pause-btn" style="display: none;">Pause</button>
             </div>
-            <div id="photo-controls" style="display: none;">
+            <div id="playback-controls" style="display: none;">
                 <button id="retake-btn">Retake</button>
                 <button id="delete-btn" class="destructive">Delete</button>
             </div>
         </div>
     </div>
-    <script src="camera.js"></script>
+    <script src="videos.js"></script>
 </body>
 </html>
 
