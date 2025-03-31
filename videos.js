@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoControls = document.getElementById('video-controls');
     const playbackControls = document.getElementById('playback-controls');
     const timerDisplay = document.getElementById('timer-display');
+    const downloadBtn = document.getElementById('download-btn');
     
     let stream = null;
     let mediaRecorder = null;
@@ -84,7 +85,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 };
                 
                 mediaRecorder.onstop = () => {
-                    const blob = new Blob(recordedChunks, { type: 'video/webm' });
+                    const blob = new Blob(recordedChunks, { 
+                        type: 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"'  // Apple-compatible format
+                    });
                     const videoURL = URL.createObjectURL(blob);
                     recordedVideo.src = videoURL;
                     
@@ -198,6 +201,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Restart camera
         initCamera();
+    });
+    
+    // Download video
+    downloadBtn.addEventListener('click', () => {
+        if (recordedVideo.src) {
+            const a = document.createElement('a');
+            a.href = recordedVideo.src;
+            a.download = `video_${new Date().toISOString()}.mp4`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+        }
     });
     
     // Initialize the camera when the page loads
