@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Effects</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-page">
+        <div class="app-header">
+            <a href="index.html" class="back-button">BACK</a>
+            <h1 style="margin-left: 20px;">Effects</h1>
+        </div>
+        <div class="app-content">
+            <div class="effects-container" id="effects-container">
+                <canvas id="canvas" width="800" height="600"></canvas>
+                <div id="effect-controls" class="effect-controls" style="display: none;">
+                    <div class="slider-container">
+                        <label>Intensity: <span id="intensity-value">5</span></label>
+                        <input type="range" id="intensity-slider" min="0" max="20" value="5">
+                    </div>
+                    <div class="slider-container">
+                        <label>Size: <span id="size-value">100</span></label>
+                        <input type="range" id="size-slider" min="10" max="850" value="100">
+                    </div>
+                    <button id="move-effect-btn">Move</button>
+                    <button id="remove-effect-btn" class="destructive">Remove</button>
+                </div>
+            </div>
+        </div>
+        <div class="app-footer">
+            <div class="effects-panel">
+                <div>
+                    <button id="load-image-btn">Load Image</button>
+                    <button id="finish-btn">Finish</button>
+                </div>
+                <div class="effects-buttons">
+                    <button id="effect-swirl">Swirl</button>
+                    <button id="effect-stretch">Stretch</button>
+                    <button id="effect-mirror">Mirror</button>
+                    <button id="effect-shrink">Shrink</button>
+                    <button id="effect-blur">Blur</button>
+                </div>
+                <button id="reset-btn" class="destructive">Reset All</button>
+            </div>
+            <input type="file" id="image-input" accept="image/*" style="display: none;">
+        </div>
+    </div>
+    <script src="effects.js"></script>
+</body>
+</html>

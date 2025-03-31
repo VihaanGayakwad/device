@@ -4,18 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const captureBtn = document.getElementById('capture-btn');
     const retakeBtn = document.getElementById('retake-btn');
     const deleteBtn = document.getElementById('delete-btn');
+    const flipCameraBtn = document.getElementById('flip-camera-btn');
     const cameraControls = document.getElementById('camera-controls');
     const photoControls = document.getElementById('photo-controls');
     
     let stream = null;
     let photoData = null;
+    let facingMode = 'environment'; // Default to back camera
     
     // Initialize camera
     async function initCamera() {
         try {
+            // Stop any existing stream
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+            
             stream = await navigator.mediaDevices.getUserMedia({
                 video: {
-                    facingMode: 'environment'
+                    facingMode: facingMode
                 },
                 audio: false
             });
@@ -25,6 +32,12 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Unable to access camera. Please make sure you have granted camera permissions.');
         }
     }
+    
+    // Flip camera
+    flipCameraBtn.addEventListener('click', () => {
+        facingMode = facingMode === 'environment' ? 'user' : 'environment';
+        initCamera();
+    });
     
     // Take a photo
     captureBtn.addEventListener('click', () => {
