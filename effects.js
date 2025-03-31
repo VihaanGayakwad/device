@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const effectControls = document.getElementById('effect-controls');
     const moveEffectBtn = document.getElementById('move-effect-btn');
     const removeEffectBtn = document.getElementById('remove-effect-btn');
+    const downloadBtn = document.getElementById('download-btn');
     
     const swirlBtn = document.getElementById('effect-swirl');
     const stretchBtn = document.getElementById('effect-stretch');
@@ -100,6 +101,16 @@ document.addEventListener('DOMContentLoaded', () => {
     mirrorBtn.addEventListener('click', () => addEffect(EFFECT_TYPES.MIRROR));
     shrinkBtn.addEventListener('click', () => addEffect(EFFECT_TYPES.SHRINK));
     blurBtn.addEventListener('click', () => addEffect(EFFECT_TYPES.BLUR));
+    
+    // Download button handler
+    downloadBtn.addEventListener('click', () => {
+        if (originalImage) {
+            const link = document.createElement('a');
+            link.download = `edited_image_${new Date().toISOString()}.png`;
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        }
+    });
     
     // Add a new effect
     function addEffect(type) {
@@ -317,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Apply effects to image
-    function applyEffects(image) {
+    function applyEffects(image, canvas, ctx, effects, selectedEffectIndex) {
         // Create an offscreen canvas to work with
         const offCanvas = document.createElement('canvas');
         offCanvas.width = canvas.width;
@@ -595,7 +606,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         if (originalImage) {
-            applyEffects(originalImage);
+            applyEffects(originalImage, canvas, ctx, effects, selectedEffectIndex);
         } else {
             drawPlaceholder();
         }
